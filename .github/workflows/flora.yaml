@@ -7,6 +7,7 @@ on:
 
 jobs:
   job1: 
+   if: ${{ vars.RUN == 'SUCCESS' && startsWith(github.event.head_commit.message, '#norun') != true }}
     runs-on: ubuntu-20.04
 
     steps:
@@ -19,9 +20,7 @@ jobs:
           scan-type: 'fs'
           scan-ref: '.'
           ignore-unfixed: true
-          format: 'table'
-          output: 'trivy-results.txt'
-          severity: 'HIGH'
+          severity: 'CRITICAL'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -36,15 +35,25 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }} 
 
       - name: Build and push
+        id: build-and-push
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: huruoqing/cicd:${{ github.sha }}
 
       - name: Digitally sign image
-        uses: sigstore/cosign-installer@v3.1.1
+        uses: sigstore/cosign-installer@v2.2.0
         with:
-          cosign-release: 'v2.1.1'
+          cosign-release: 'v2.2.0'
+
+        - name: Sign image with a key
+        run: |
+          cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${TAGS}@${DIGEST}"
+        env:
+          TAGS: huruoqing/cicd:${{ github.sha }}
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
 
       - name: Send Slack Notification
         id: slack
@@ -59,16 +68,8 @@ jobs:
             Docker: https://hub.docker.com/repository/docker/huruoqing/dockerreoository/general
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           
-      - name: Upload file to Slack
-        uses: MeilCli/slack-upload-file@v3
-        with:
-          slack_token: ${{ secrets.SLACK_TOKEN }}
-          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_path: 'trivy-results.txt'
-          initial_comment: 'Scan report by Hu Ruoqing'
-          
   job2:
-    if: ${{ vars.VARIABLE_NAME == 'B' && startsWith(github.event.head_commit.message, '#norun') != true }}
+    if: ${{ vars.RUN == 'FAIL' && startsWith(github.event.head_commit.message, '#norun') != true }}
     runs-on: ubuntu-20.04
 
     steps: 
@@ -83,7 +84,7 @@ jobs:
           ignore-unfixed: true
           format: 'table'
           output: 'trivy-results.txt'
-          severity: 'CRITICAL'
+          severity: 'HIGH'
 
       - name: Send Slack notification2
         uses: rtCamp/action-slack-notify@v2

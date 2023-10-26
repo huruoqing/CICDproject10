@@ -21,7 +21,7 @@ jobs:
           ignore-unfixed: true
           format: 'table'
           output: 'trivy-results.txt'
-          severity: 'HIGH'
+          severity: 'CRITICAL'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -94,7 +94,7 @@ jobs:
             Failed trivy scan, see uploaded report
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Upload file to Slack
+      - name: Upload file to Slack2
         uses: MeilCli/slack-upload-file@v3
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}

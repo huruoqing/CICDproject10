@@ -57,7 +57,7 @@ jobs:
             Email:huruoqing@qq.com
             GitHub: https://github.com/huruoqing/CICDproject10.git 
             Docker: https://hub.docker.com/repository/docker/huruoqing/dockerreoository/general
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           
       - name: Upload file to Slack
         uses: MeilCli/slack-upload-file@v3

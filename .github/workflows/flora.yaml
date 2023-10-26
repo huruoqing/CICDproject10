@@ -58,7 +58,7 @@ jobs:
           slack-token: ${{ secrets.SLACK_TOKEN }}
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           file_path: 'docs/*.txt'
-          initial_comment: 'post by slack-upload-file'
+          initial_comment: 'post by slack-upload-file' 
 
 
   

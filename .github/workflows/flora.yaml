@@ -7,7 +7,7 @@ on:
 
 jobs:
   job1: 
-   if: ${{ vars.RUN == 'SUCCESS' && startsWith(github.event.head_commit.message, '#norun') != true }}
+    if: ${{ vars.RUN == 'SUCCESS' && startsWith(github.event.head_commit.message, '#norun') != true }}
     runs-on: ubuntu-20.04
 
     steps:
@@ -46,7 +46,7 @@ jobs:
         with:
           cosign-release: 'v2.2.0'
 
-        - name: Sign image with a key
+      - name: Sign image with a key
         run: |
           cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${TAGS}@${DIGEST}"
         env:

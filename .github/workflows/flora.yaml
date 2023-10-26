@@ -62,8 +62,8 @@ jobs:
           SLACK_TITLE: "Image built and signed"
           SLACK_MESSAGE: |
             Name: Huruoqing
-            Matriculation: E1221827
-            Email:huruoqing@qq.com
+            Matriculation: A0286015H
+            Email:E1221827@u.nus.edu
             GitHub: https://github.com/huruoqing/CICDproject10.git 
             Docker: https://hub.docker.com/repository/docker/huruoqing/dockerreoository/general
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -102,4 +102,5 @@ jobs:
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
           file_path: 'trivy-results.txt'
           initial_comment: 'Scan report by Hu Ruoqing'
-          
+
+

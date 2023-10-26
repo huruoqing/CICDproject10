@@ -62,10 +62,10 @@ jobs:
       - name: Upload file to Slack
         uses: MeilCli/slack-upload-file@v3
         with:
-          slack-token: ${{ secrets.SLACK_TOKEN }}
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
           file_path: 'trivy-results.txt'
-          initial_comment: 'post by slack-upload-file' 
+          initial_comment: 'Scan report by Hu Ruoqing' 
 
 
   

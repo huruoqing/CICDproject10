@@ -50,6 +50,13 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
         env: 
+          SLACK_TITLE: "Image built and signed"
+          SLACK_MESSAGE: |
+            Name: Huruoqing
+            Matriculation: E1221827
+            Email:huruoqing@qq.com
+            GitHub: https://github.com/huruoqing/CICDproject10.git 
+            Docker: https://hub.docker.com/repository/docker/huruoqing/dockerreoository/general
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           
       - name: Upload file to Slack

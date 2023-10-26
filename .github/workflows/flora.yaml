@@ -52,8 +52,8 @@ jobs:
         env: 
           SLACK_TITLE: "Image built and signed"
           SLACK_MESSAGE: |
-            Name: Huruoqing
-            Matriculation: E1221827
+            Name:Huruoqing
+            Matriculation:E1221827
             Email:huruoqing@qq.com
             GitHub: https://github.com/huruoqing/CICDproject10.git 
             Docker: https://hub.docker.com/repository/docker/huruoqing/dockerreoository/general

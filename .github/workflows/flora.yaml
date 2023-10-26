@@ -67,10 +67,11 @@ jobs:
           file_path: 'trivy-results.txt'
           initial_comment: 'Scan report by Hu Ruoqing'
           
-job2:
-  if: ${{ vars.VARIABLE_NAME == 'B' && startsWith(github.event.head_commit.message, '#norun') != true }}
-  runs-on: ubuntu-20.04
-  steps: 
+  job2:
+    if: ${{ vars.VARIABLE_NAME == 'B' && startsWith(github.event.head_commit.message, '#norun') != true }}
+    runs-on: ubuntu-20.04
+
+    steps: 
       - name: Checkout code
         uses: actions/checkout@v3  
 

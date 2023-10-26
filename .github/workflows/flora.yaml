@@ -65,7 +65,7 @@ jobs:
             Matriculation: A0286015H
             Email:E1221827@u.nus.edu
             GitHub: https://github.com/huruoqing/CICDproject10.git 
-            Docker: https://hub.docker.com/repository/docker/huruoqing/dockerreoository/general
+            Docker: https://hub.docker.com/repository/docker/huruoqing/cicd/general
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           
   job2:
@@ -102,4 +102,3 @@ jobs:
           channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
           file_path: 'trivy-results.txt'
           initial_comment: 'Scan report by Hu Ruoqing'
-
